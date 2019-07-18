@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import org.json.JSONArray;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import butterknife.Bind;
@@ -100,7 +102,25 @@ public class MainActivity extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                name=tt1.getText().toString();
+                password=tt2.getText().toString();
+                if(name!=null||!name.equals("")||password!=null||!password.equals("")){
+                    BmobQuery<admin>query=new BmobQuery<admin>();
+                    query.addWhereEqualTo("adname",name);
+                    query.findObjects(new FindListener<admin>() {
+                        @Override
+                        public void done(List<admin> list, BmobException e) {
+                            if(e==null){
+                                Iterator<admin> iterator= (Iterator<admin>) list;
+                                while(((Iterator) iterator).hasNext()){
+                                    admin admin=iterator.next();
+                                    System.out.println(admin.getPassword());
+                                }
+                            }
+                        }
+                    });
 
+                }
             }
         });
 
