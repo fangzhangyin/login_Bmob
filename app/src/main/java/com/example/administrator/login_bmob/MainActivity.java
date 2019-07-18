@@ -1,14 +1,19 @@
 package com.example.administrator.login_bmob;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import org.json.JSONArray;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import butterknife.Bind;
@@ -29,11 +34,15 @@ public class MainActivity extends AppCompatActivity {
     private Button btn1;
     private Button btn2;
 
+    private ImageButton btn;
+
     private EditText tt1;
     private EditText tt2;
 
     private String name=null;
     private String password=null;
+
+    int flag=0;
 
     admin ad=new admin();
 
@@ -65,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
 
         btn1=(Button)findViewById(R.id.btn1);
         btn2=(Button)findViewById(R.id.btn2);
+
+        btn=(ImageButton)findViewById(R.id.btnshow);
 
 
         //添加记录到adname(注册)
@@ -100,11 +111,55 @@ public class MainActivity extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                name=tt1.getText().toString();
+                password=tt2.getText().toString();
+                if(name!=null||!name.equals("")||password!=null||!password.equals("")){
+                    BmobQuery<admin>query=new BmobQuery<admin>();
+                    query.addWhereEqualTo("adname",name);
+                    query.findObjects(new FindListener<admin>() {
+                        @Override
+                        public void done(List<admin> list, BmobException e) {
+                            String pass=null;
+                            if(list.size()==1) {
+                                if (e == null) {
+                                    Iterator iterator = list.iterator();
+                                    while (((Iterator) iterator).hasNext()) {
+                                        admin admin = (admin) iterator.next();
+                                        pass=admin.getPassword();
+                                        break;
+                                    }
+                                    if(pass.equals(password)){
+                                        Intent intent=new Intent(MainActivity.this,lendin.class);
+                                        startActivity(intent);
+                                    }else{
+                                        t1.setText("用户名或者密码错误");
+                                    }
+                                }
+                            }
+                            else{
+                                t1.setText("用户不存在");
+                            }
+                        }
+                    });
 
+                }
             }
         });
 
-
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(flag==0){
+                    btn.setBackgroundResource(R.drawable.bmob_update_btn_check_on_focused_holo_light);
+                    tt2.setInputType(InputType.TYPE_CLASS_TEXT);
+                    flag=1;
+                }else if(flag==1){
+                    btn.setBackgroundResource(R.drawable.bmob_update_btn_check_off_focused_holo_light);
+                    tt2.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD|InputType.TYPE_CLASS_TEXT);
+                    flag=0;
+                }
+            }
+        });
 
 
     }
