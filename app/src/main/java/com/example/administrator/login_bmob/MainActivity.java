@@ -104,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
 //                        }
 //                    });
 //                }
-
                 startActivity(new Intent(getBaseContext(),resign.class));
             }
         });
@@ -132,8 +131,7 @@ public class MainActivity extends AppCompatActivity {
                                         break;
                                     }
                                     if(pass.equals(password)){
-                                        Intent intent=new Intent(MainActivity.this,lendin.class);
-                                        startActivity(intent);
+                                        startActivity(new Intent(getBaseContext(), lendin.class));
                                     }else{
                                         t1.setText("用户名或者密码错误");
                                     }
