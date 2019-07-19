@@ -15,6 +15,7 @@ buildscript {
     }
 }
 
+//添加bmob依赖
 allprojects {
     repositories {
         google()
