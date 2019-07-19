@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //初始化bmob云
         Bmob.initialize(MainActivity.this,"273a956d9720a23f5562cc6bf625c4f0");
         t1=(TextView)findViewById(R.id.t1);
         t2=(TextView)findViewById(R.id.t2);
@@ -83,26 +84,28 @@ public class MainActivity extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                name=tt1.getText().toString();
-                password=tt2.getText().toString();
-                if(name!=null||!name.equals("")||password!=null||!password.equals("")){
-                    ad.setAdname(name);
-                    ad.setPassword(password);
-                    ad.save(new SaveListener<String>() {
-                        @Override
-                        public void done(String s, BmobException e) {
-                            if(e==null){
-                                t1.setText("注册成功");
-                            }
-                            else if(e.getErrorCode()==401){
-                                t1.setText("用户名已存在");
-                            }
-                            else{
-                                t1.setText("未知错误");
-                            }
-                        }
-                    });
-                }
+//                name=tt1.getText().toString().trim();
+//                password=tt2.getText().toString().trim();
+//                if(name!=null||!name.equals("")||password!=null||!password.equals("")){
+//                    ad.setAdname(name);
+//                    ad.setPassword(password);
+//                    ad.save(new SaveListener<String>() {
+//                        @Override
+//                        public void done(String s, BmobException e) {
+//                            if(e==null){
+//                                t1.setText("注册成功");
+//                            }
+//                            else if(e.getErrorCode()==401){
+//                                t1.setText("用户名已存在");
+//                            }
+//                            else{
+//                                t1.setText("未知错误");
+//                            }
+//                        }
+//                    });
+//                }
+
+                startActivity(new Intent(getBaseContext(),resign.class));
             }
         });
 
@@ -111,8 +114,8 @@ public class MainActivity extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                name=tt1.getText().toString();
-                password=tt2.getText().toString();
+                name=tt1.getText().toString().trim();
+                password=tt2.getText().toString().trim();
                 if(name!=null||!name.equals("")||password!=null||!password.equals("")){
                     BmobQuery<admin>query=new BmobQuery<admin>();
                     query.addWhereEqualTo("adname",name);
@@ -146,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //密码的显示和隐藏
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
