@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                                         break;
                                     }
                                     if(pass.equals(password)){
-                                        startActivity(new Intent(getBaseContext(), lendin.class));
+                                        startActivity(new Intent(getBaseContext(), lendin.class).putExtra("adname",name));
                                     }else{
                                         t1.setText("用户名或者密码错误");
                                     }

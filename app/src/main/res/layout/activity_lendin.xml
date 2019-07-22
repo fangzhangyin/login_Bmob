@@ -4,18 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     android:orientation="vertical"
     tools:context=".lendin">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         android:id="@+id/lin1"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+
+        <!--<ImageView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignStart="@+id/lin1"-->
+            <!--android:layout_alignTop="@+id/lin1"-->
+            <!--android:layout_weight="1"-->
+            <!--android:src="@mipmap/offline_user" />-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="消息"
+                android:id="@+id/flag"
+                android:textSize="22dp"
+                />
+        </LinearLayout>
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/search"
+            />
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/add"
+            />
+
+
 
     </LinearLayout>
 
     <fragment
+        android:id="@+id/frame"
+        android:name="com.example.administrator.login_bmob.chart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/lin1"
@@ -24,32 +65,39 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         android:layout_alignParentBottom="true"
+        android:background="#fff4ff"
         android:orientation="horizontal"
+        android:gravity="center"
         android:id="@+id/lin2"
         >
+
         <ImageView
-            android:layout_marginLeft="10dp"
+            android:id="@+id/f1"
             android:layout_width="90dp"
             android:layout_height="match_parent"
-            android:id="@+id/f1"
-            />
+            android:layout_alignTop="@+id/lin2"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/chat" />
         <ImageView
             android:layout_marginLeft="10dp"
             android:layout_width="90dp"
+            android:src="@mipmap/user_group"
             android:layout_height="match_parent"
             android:id="@+id/f2"
             />
         <ImageView
             android:layout_marginLeft="10dp"
             android:layout_width="90dp"
+            android:src="@mipmap/voice_chat"
             android:layout_height="match_parent"
             android:id="@+id/f3"
             />
         <ImageView
             android:layout_marginLeft="10dp"
             android:layout_width="90dp"
+            android:src="@mipmap/edit_user"
             android:layout_height="match_parent"
             android:id="@+id/f4"
             />
