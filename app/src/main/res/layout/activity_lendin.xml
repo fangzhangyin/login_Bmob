@@ -44,11 +44,30 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/search"
             />
-        <ImageView
+        <RelativeLayout
             android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/add"
-            />
+            android:layout_height="match_parent"
+            android:gravity="center"
+            >
+
+
+            <Spinner
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/add"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@mipmap/add"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/add"
+                />
+
+        </RelativeLayout>
+
 
 
 

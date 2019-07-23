@@ -13,6 +13,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:layout_marginTop="40dp"
             android:id="@+id/slin1"
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -71,6 +72,7 @@
             android:paddingLeft="20dp">
 
             <TextView
+                android:id="@+id/oneself"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -89,14 +91,41 @@
             android:layout_marginTop="10dp"
             android:layout_below="@id/slin2"
             android:background="#ffff"
+            android:id="@+id/slin3"
             android:gravity="center_vertical"
             android:paddingLeft="20dp">
 
             <TextView
+                android:id="@+id/syset"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="系统设置"
+                android:textSize="20dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/arrow_right_32x32" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/slin3"
+            android:background="#ffff"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp">
+
+            <TextView
+                android:id="@+id/about"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="关于本软件"
                 android:textSize="20dp" />
 
             <ImageView
@@ -117,6 +146,7 @@
             android:gravity="center">
 
             <Button
+                android:id="@+id/exit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/colorAccent"
@@ -124,6 +154,8 @@
                 android:textColor="#ffff"
                 android:textSize="30dp" />
         </LinearLayout>
+
+
     </RelativeLayout>
 
 

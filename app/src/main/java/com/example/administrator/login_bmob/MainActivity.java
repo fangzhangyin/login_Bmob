@@ -41,10 +41,15 @@ public class MainActivity extends AppCompatActivity {
 
     private String name=null;
     private String password=null;
+    private String sex=null;
+    private String person;
+    private String email;
+
 
     int flag=0;
 
     admin ad=new admin();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,10 +133,18 @@ public class MainActivity extends AppCompatActivity {
                                     while (((Iterator) iterator).hasNext()) {
                                         admin admin = (admin) iterator.next();
                                         pass=admin.getPassword();
+                                        person=admin.getPerson();
+                                        sex=admin.getSex();
+                                        email=admin.getEmail();
                                         break;
                                     }
                                     if(pass.equals(password)){
-                                        startActivity(new Intent(getBaseContext(), lendin.class).putExtra("adname",name));
+                                        Intent intent=new Intent(MainActivity.this,lendin.class);
+                                        intent.putExtra("admin",name);
+                                        intent.putExtra("sex",sex);
+                                        intent.putExtra("person",person);
+                                        intent.putExtra("email",email);
+                                        startActivity(intent);
                                     }else{
                                         t1.setText("用户名或者密码错误");
                                     }

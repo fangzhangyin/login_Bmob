@@ -8,9 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import butterknife.OnClick;
@@ -18,6 +20,12 @@ import butterknife.OnClick;
 public class lendin extends AppCompatActivity implements View.OnClickListener{
 
     private String adname;
+    private String sex=null;
+    private String person;
+    private String email;
+
+    private Spinner spinner;
+    private ArrayAdapter<CharSequence> adapter;
 
     private ImageView m1;
     private ImageView m2;
@@ -33,7 +41,10 @@ public class lendin extends AppCompatActivity implements View.OnClickListener{
         setContentView(R.layout.activity_lendin);
         Intent intent=getIntent();
         adname=intent.getStringExtra("adname");
-        System.out.println(adname);
+        person=intent.getStringExtra("person");
+        sex=intent.getStringExtra("sex");
+        email=intent.getStringExtra("email");
+        System.out.println(adname+"\n"+person+"\n"+sex+"\n"+email);
 
 
         m1=(ImageView)findViewById(R.id.f1);
@@ -41,6 +52,13 @@ public class lendin extends AppCompatActivity implements View.OnClickListener{
         m3=(ImageView)findViewById(R.id.f3);
         m4=(ImageView)findViewById(R.id.f4);
         flag=(TextView)findViewById(R.id.flag);
+
+        spinner=(Spinner) findViewById(R.id.add);
+        adapter=ArrayAdapter.createFromResource(this,R.array.datalist,R.layout.support_simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+
+
 
         linearLayout=(LinearLayout)findViewById(R.id.lin1);
 
@@ -54,6 +72,17 @@ public class lendin extends AppCompatActivity implements View.OnClickListener{
     public String  getself(){
         return adname;
     }
+    public String getemail(){
+        return email;
+    }
+    public String getparent(){
+        return person;
+    }
+    public String sex(){
+        return sex;
+    }
+
+
 
     @Override
     public void onClick(View v) {

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="setlist">
+        <item></item>
+        <item>删除</item>
+        <item>设置备注</item>
+        <item>收藏</item>
+    </string-array>
+</resources>
