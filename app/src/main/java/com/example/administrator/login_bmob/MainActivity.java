@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     private String email;
 
 
+    private String[] s;
+
     int flag=0;
 
     admin ad=new admin();
@@ -136,11 +138,14 @@ public class MainActivity extends AppCompatActivity {
                                         person=admin.getPerson();
                                         sex=admin.getSex();
                                         email=admin.getEmail();
+                                        s=new String[]{name,person,sex,email};
                                         break;
                                     }
                                     if(pass.equals(password)){
                                         Intent intent=new Intent(MainActivity.this,lendin.class);
-                                        intent.putExtra("admin",name);
+                                        intent.putExtra("adname",name);
+                                        intent.putExtra("s",s);
+                                        System.out.println(name);
                                         intent.putExtra("sex",sex);
                                         intent.putExtra("person",person);
                                         intent.putExtra("email",email);

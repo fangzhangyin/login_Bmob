@@ -32,7 +32,8 @@ public class self extends Fragment implements View.OnClickListener {
 
     private String self;
     private String email;
-    private String parent;
+    private String person;
+    private String sex;
 
     private Context context;
 
@@ -40,6 +41,9 @@ public class self extends Fragment implements View.OnClickListener {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         self = ((lendin) activity).getself();
+        email = ((lendin) activity).getemail();
+        person = ((lendin) activity).getperson();
+        sex = ((lendin) activity).getsex();
     }
 
     @SuppressLint("WrongViewCast")
@@ -72,7 +76,10 @@ public class self extends Fragment implements View.OnClickListener {
             case R.id.oneself:
                 Intent intent=new Intent(context,myself.class);
                 intent.putExtra("self",self);
-
+                intent.putExtra("email",email);
+                intent.putExtra("person",person);
+                intent.putExtra("sex",sex);
+                startActivity(intent);
                 break;
         }
     }
