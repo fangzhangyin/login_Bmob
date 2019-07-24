@@ -1,5 +1,7 @@
 package entity;
 
+import java.io.File;
+
 import cn.bmob.v3.BmobObject;
 import db.ADUS;
 
@@ -11,6 +13,15 @@ public class admin extends BmobObject {
     private String root;
     private String person;
     private String sex;
+    private File head;
+
+    public File getHead() {
+        return head;
+    }
+
+    public void setHead(File head) {
+        this.head = head;
+    }
 
     public String getSex() {
         return sex;

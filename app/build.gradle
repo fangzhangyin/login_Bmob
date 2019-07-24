@@ -39,5 +39,7 @@ dependencies {
     implementation 'com.jakewharton:butterknife:7.0.1'
     annotationProcessor 'com.jakewharton:butterknife:7.0.1'
 
+    implementation 'com.github.wildma:PictureSelector:1.1.3'
+
 
 }
