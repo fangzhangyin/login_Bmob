@@ -113,13 +113,22 @@ public class resign extends AppCompatActivity {
 
 
 
-    public boolean checkemail(String email){
+    public static boolean checkemail(String email){
         boolean flag=false;
         if (email.matches("[\\w\\.\\-]+@([\\w\\-]+\\.)+[\\w\\-]+")) {
             flag=true;
         }
         return flag;
     }
+
+    public static boolean checksex(String sex){
+        boolean flag=false;
+        if(sex.equals("男")||sex.equals("女")){
+            flag=true;
+        }
+        return flag;
+    }
+
     public boolean checkpassword(String p1,String p2){
         boolean flag=false;
         if(p1.equals(p2)){

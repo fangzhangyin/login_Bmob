@@ -24,6 +24,8 @@ public class lendin extends AppCompatActivity implements View.OnClickListener{
     private String person;
     private String email;
 
+    private String[] s;
+
     private Spinner spinner;
     private ArrayAdapter<CharSequence> adapter;
 
@@ -45,6 +47,9 @@ public class lendin extends AppCompatActivity implements View.OnClickListener{
         sex=intent.getStringExtra("sex");
         email=intent.getStringExtra("email");
         System.out.println(adname+"\n"+person+"\n"+sex+"\n"+email);
+
+//        s=intent.getStringArrayExtra("s");
+//        System.out.println(s[0]+"" +"\n"+s[1]);
 
 
         m1=(ImageView)findViewById(R.id.f1);
@@ -75,10 +80,10 @@ public class lendin extends AppCompatActivity implements View.OnClickListener{
     public String getemail(){
         return email;
     }
-    public String getparent(){
+    public String getperson(){
         return person;
     }
-    public String sex(){
+    public String getsex(){
         return sex;
     }
 

@@ -1,20 +1,20 @@
 package entity;
 
+import java.io.File;
+
 import cn.bmob.v3.BmobObject;
 
 public class news extends BmobObject {
-    private String objectId;
     private String adname;
     private String news;
+    private File image;
 
-    @Override
-    public String getObjectId() {
-        return objectId;
+    public File getImage() {
+        return image;
     }
 
-    @Override
-    public void setObjectId(String objectId) {
-        this.objectId = objectId;
+    public void setImage(File image) {
+        this.image = image;
     }
 
     public String getAdname() {
