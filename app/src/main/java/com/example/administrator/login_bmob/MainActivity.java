@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private String sex=null;
     private String person;
     private String email;
+    private String id;
+    private String head;
 
 
     private String[] s;
@@ -138,17 +140,22 @@ public class MainActivity extends AppCompatActivity {
                                         person=admin.getPerson();
                                         sex=admin.getSex();
                                         email=admin.getEmail();
+                                        id=admin.getObjectId();
+                                        head=admin.getHead();
                                         s=new String[]{name,person,sex,email};
                                         break;
                                     }
                                     if(pass.equals(password)){
                                         Intent intent=new Intent(MainActivity.this,lendin.class);
                                         intent.putExtra("adname",name);
+                                        intent.putExtra("pass",password);
                                         intent.putExtra("s",s);
                                         System.out.println(name);
                                         intent.putExtra("sex",sex);
                                         intent.putExtra("person",person);
                                         intent.putExtra("email",email);
+                                        intent.putExtra("id",id);
+                                        intent.putExtra("head",head);
                                         startActivity(intent);
                                     }else{
                                         t1.setText("用户名或者密码错误");

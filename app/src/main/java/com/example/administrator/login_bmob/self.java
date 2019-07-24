@@ -5,12 +5,14 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -29,13 +31,19 @@ public class self extends Fragment implements View.OnClickListener {
     private TextView syset;
     private TextView about;
     private TextView exit;
+    private TextView personal;
 
     private String self;
     private String email;
     private String person;
     private String sex;
+    private String id;
+    private String pass;
+    private String head;
 
     private Context context;
+
+    private ImageView shead;
 
     @Override
     public void onAttach(Activity activity) {
@@ -44,6 +52,10 @@ public class self extends Fragment implements View.OnClickListener {
         email = ((lendin) activity).getemail();
         person = ((lendin) activity).getperson();
         sex = ((lendin) activity).getsex();
+        id=((lendin)activity).getid();
+        pass=((lendin)activity).getpass();
+        head=((lendin)activity).gethead();
+
     }
 
     @SuppressLint("WrongViewCast")
@@ -58,6 +70,12 @@ public class self extends Fragment implements View.OnClickListener {
         syset=(TextView) view.findViewById(R.id.syset);
         about=(TextView) view.findViewById(R.id.about);
         exit=(TextView) view.findViewById(R.id.exit);
+        personal=(TextView)view.findViewById(R.id.personal);
+
+        personal.setText(person);
+
+        shead=(ImageView)view.findViewById(R.id.shead);
+        shead.setImageBitmap(BitmapFactory.decodeFile(head));
 
         oneself.setOnClickListener(this);
         syset.setOnClickListener(this);
@@ -79,7 +97,13 @@ public class self extends Fragment implements View.OnClickListener {
                 intent.putExtra("email",email);
                 intent.putExtra("person",person);
                 intent.putExtra("sex",sex);
+                intent.putExtra("id",id);
+                intent.putExtra("pass",pass);
+                intent.putExtra("head",head);
                 startActivity(intent);
+                break;
+            case R.id.exit:
+
                 break;
         }
     }

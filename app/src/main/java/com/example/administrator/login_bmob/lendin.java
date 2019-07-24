@@ -23,6 +23,9 @@ public class lendin extends AppCompatActivity implements View.OnClickListener{
     private String sex=null;
     private String person;
     private String email;
+    private String id;
+    private String pass;
+    private String head;
 
     private String[] s;
 
@@ -46,7 +49,10 @@ public class lendin extends AppCompatActivity implements View.OnClickListener{
         person=intent.getStringExtra("person");
         sex=intent.getStringExtra("sex");
         email=intent.getStringExtra("email");
-        System.out.println(adname+"\n"+person+"\n"+sex+"\n"+email);
+        id=intent.getStringExtra("id");
+        pass=intent.getStringExtra("pass");
+        head=intent.getStringExtra("head");
+        System.out.println(adname+"\n"+person+"\n"+sex+"\n"+email+"\n"+id+"\n"+pass+"\n"+head);
 
 //        s=intent.getStringArrayExtra("s");
 //        System.out.println(s[0]+"" +"\n"+s[1]);
@@ -86,7 +92,9 @@ public class lendin extends AppCompatActivity implements View.OnClickListener{
     public String getsex(){
         return sex;
     }
-
+    public String getid(){return id;}
+    public String getpass(){return pass;}
+    public String gethead(){return head;}
 
 
     @Override

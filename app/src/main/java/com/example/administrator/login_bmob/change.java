@@ -1,14 +1,17 @@
 package com.example.administrator.login_bmob;
 
+import android.app.Service;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class change extends AppCompatActivity  {
+public class change extends AppCompatActivity {
 
     String flag;
 
@@ -26,55 +29,66 @@ public class change extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change);
 
-        newmsg=(EditText)findViewById(R.id.newmsg);
-        save=(Button)findViewById(R.id.save);
-        ding =(TextView)findViewById(R.id.ding);
+        newmsg = (EditText) findViewById(R.id.newmsg);
+        save = (Button) findViewById(R.id.save);
+        ding = (TextView) findViewById(R.id.ding);
 
-        final Intent intent=getIntent();
-       flag=intent.getStringExtra("flag");
+        final Intent intent = getIntent();
+        flag = intent.getStringExtra("flag");
         System.out.println(flag);
 
-        save.setOnClickListener(new View.OnClickListener() {
+
+
+
+            save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                msg=newmsg.getText().toString().trim();
+                msg = newmsg.getText().toString().trim();
                 Intent intentTemp = new Intent();
-                if(!msg.equals("")&&msg!=null){
-                if(flag.equals("a")){
-                    intentTemp.putExtra("msg",msg);
-                    setResult(1,intentTemp);
-                    finish();
-                }else if(flag.equals("b")){
-                    if(resign.checkemail(msg)) {
+                if (!msg.equals("") && msg != null) {
+                    if (flag.equals("a")) {
                         intentTemp.putExtra("msg", msg);
-                        setResult(2, intentTemp);
+                        setResult(1, intentTemp);
                         finish();
-                    }else{
-                        ding.setText("邮箱格式不正确");
-                    }
-                }
-                else if(flag.equals("c")){
-                    if(resign.checksex(msg)){
+                    } else if (flag.equals("b")) {
+                        if (resign.checkemail(msg)) {
+                            intentTemp.putExtra("msg", msg);
+                            setResult(2, intentTemp);
+                            finish();
+                        } else {
+                            ding.setText("邮箱格式不正确");
+                        }
+                    } else if (flag.equals("c")) {
+                        if (resign.checksex(msg)) {
+                            intentTemp.putExtra("msg", msg);
+                            setResult(3, intentTemp);
+                            finish();
+                        } else {
+                            ding.setText("性别输入不正确");
+                        }
+                    } else if (flag.equals("d")) {
                         intentTemp.putExtra("msg", msg);
-                        setResult(3, intentTemp);
+                        setResult(4, intentTemp);
                         finish();
-                    }else{
-                        ding.setText("性别输入不正确");
+                    } else if (flag.equals("e")) {
+                        intentTemp.putExtra("msg", msg);
+                        setResult(5, intentTemp);
+                        finish();
                     }
-                }
-                else if(flag.equals("d")){
-                    intentTemp.putExtra("msg",msg);
-                    setResult(4,intentTemp);
-                    finish();
-                }
-                }else {
+                } else {
                     ding.setText("不能为空");
                 }
             }
         });
 
     }
-
-
-
-}
+    public boolean onKeyDown(int kCode,KeyEvent kEvent)
+    {
+        switch(kCode) {
+            case KeyEvent.KEYCODE_BACK:
+                System.out.println("error");
+                break;
+        }
+        return false;
+    }
+    }

@@ -13,13 +13,13 @@ public class admin extends BmobObject {
     private String root;
     private String person;
     private String sex;
-    private File head;
+    private String  head;
 
-    public File getHead() {
+    public String getHead() {
         return head;
     }
 
-    public void setHead(File head) {
+    public void setHead(String  head) {
         this.head = head;
     }
 
