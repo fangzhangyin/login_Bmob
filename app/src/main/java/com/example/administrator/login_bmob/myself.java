@@ -1,7 +1,9 @@
 package com.example.administrator.login_bmob;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,6 +13,7 @@ import android.graphics.Picture;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,23 +25,45 @@ import android.widget.TextView;
 
 import com.wildma.pictureselector.PictureSelector;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 
 import butterknife.OnClick;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.UpdateListener;
+import entity.admin;
+import gangbo.baseActivity;
+import saveFile.fileWR;
 
-public class myself extends AppCompatActivity implements View.OnClickListener {
+public class myself extends baseActivity implements View.OnClickListener {
 
     private static final int CROP_SMALL_PICTURE = 1;
     private TextView selfname;
     private TextView selfemail;
     private TextView selfsex;
     private TextView selfparent;
+    private TextView selfpass;
+
+    private String s;
+    private String id;
+
+    private String path=null;
 
     private String name;
     private String email;
     private String sex;
     private String person;
+    private String shead;
 
     private ImageView back;
 
@@ -48,6 +73,7 @@ public class myself extends AppCompatActivity implements View.OnClickListener {
     private LinearLayout selfline4;
     private LinearLayout selfline5;
     private LinearLayout selfline6;
+    private LinearLayout pass;
 
     private ImageView head;
 
@@ -64,6 +90,7 @@ public class myself extends AppCompatActivity implements View.OnClickListener {
         selfemail=(TextView)findViewById(R.id.selfemail);
         selfsex=(TextView)findViewById(R.id.selfsex);
         selfparent=(TextView)findViewById(R.id.selfparent);
+        selfpass=(TextView)findViewById(R.id.selfpass) ;
 
         back=(ImageView)findViewById(R.id.back);
 
@@ -73,6 +100,8 @@ public class myself extends AppCompatActivity implements View.OnClickListener {
         selfline4=findViewById(R.id.selfline4);
         selfline5=findViewById(R.id.selfline5);
         selfline6=findViewById(R.id.selfline6);
+        pass=findViewById(R.id.pass);
+
 
         head=(ImageView)findViewById(R.id.head);
 
@@ -81,6 +110,8 @@ public class myself extends AppCompatActivity implements View.OnClickListener {
         selfline3.setOnClickListener(this);
         selfline4.setOnClickListener(this);
         selfline5.setOnClickListener(this);
+        selfline6.setOnClickListener(this);
+        pass.setOnClickListener(this);
 
 
         back.setOnClickListener(this);
@@ -90,14 +121,17 @@ public class myself extends AppCompatActivity implements View.OnClickListener {
         email=intent.getStringExtra("email");
         sex=intent.getStringExtra("sex");
         person=intent.getStringExtra("person");
+        id=intent.getStringExtra("id");
+        selfpass.setText(intent.getStringExtra("pass"));
+        shead=intent.getStringExtra("head");
+
 
         selfname.setText(name);
         selfemail.setText(email);
         selfsex.setText(sex);
         selfparent.setText(person);
 
-
-
+        head.setImageBitmap(BitmapFactory.decodeFile(shead));
     }
 
 
@@ -106,19 +140,36 @@ public class myself extends AppCompatActivity implements View.OnClickListener {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode == PictureSelector.SELECT_REQUEST_CODE&&data!=null){
             String picturePath = data.getStringExtra(PictureSelector.PICTURE_PATH);
-            //System.out.println(PictureSelector.PICTURE_PATH);
+            path=data.getStringExtra(PictureSelector.PICTURE_PATH);
             head.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+            //System.out.println(path);
         }
         else if(requestCode==1){
-            selfname.setText(data.getStringExtra("msg"));
+            if(data.getStringExtra("msg")!=null) {
+                selfname.setText(data.getStringExtra("msg"));
+            }
         }
         else if(requestCode==2){
-            selfemail.setText(data.getStringExtra("msg"));
+            if(data.getStringExtra("msg")!=null) {
+                selfemail.setText(data.getStringExtra("msg"));
+            }
+            //selfemail.setText(data.getStringExtra("msg"));
         }
         else if(requestCode==3){
-            selfsex.setText(data.getStringExtra("msg"));
+            if(data.getStringExtra("msg")!=null) {
+                selfsex.setText(data.getStringExtra("msg"));
+            }
+            //selfsex.setText(data.getStringExtra("msg"));
         }else if(requestCode==4){
-            selfparent.setText(data.getStringExtra("msg"));
+            if(data.getStringExtra("msg")!=null) {
+                selfparent.setText(data.getStringExtra("msg"));
+            }
+           // selfparent.setText(data.getStringExtra("msg"));
+        }else if(requestCode==5){
+            if(data.getStringExtra("msg")!=null) {
+                selfpass.setText(data.getStringExtra("msg"));
+            }
+            //selfpass.setText(data.getStringExtra("msg"));
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -177,11 +228,46 @@ public class myself extends AppCompatActivity implements View.OnClickListener {
                 intent4.putExtra("flag","d");
                 startActivityForResult(intent4,4);
                 break;
-            case R.id.selfline6:
-
+            case R.id.pass:
+                Intent intent5=new Intent(myself.this,change.class);
+                intent5.putExtra("flag","e");
+                startActivityForResult(intent5,5);
                 break;
+            case R.id.selfline6:
+                admin admin=new admin();
+                admin.setAdname(selfname.getText().toString());
+                admin.setSex(selfsex.getText().toString());
+                admin.setEmail(selfemail.getText().toString());
+                admin.setPerson(selfparent.getText().toString());
+                admin.setPassword(selfpass.getText().toString());
+                if(path!=null){
+                try {
+                    path= fileWR.file2(admin.getAdname(),path);
+                    admin.setHead(path);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                }
+
+
+                    admin.update(id,new UpdateListener() {
+                        @Override
+                        public void done(BmobException e) {
+                       if(e==null){
+//                           Intent intent = new Intent(myself.this,MainActivity.class);//跳转到MainActivity
+//                           startActivity(intent);
+                           android.os.Process.killProcess(android.os.Process.myPid());
+                       }
+                       else {
+                           System.out.println(e.getErrorCode());
+                       }
+                        }
+                    });
+
         }
     }
+
+
 
 
 

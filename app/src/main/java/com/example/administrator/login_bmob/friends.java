@@ -3,15 +3,19 @@ package com.example.administrator.login_bmob;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,8 +36,12 @@ import static android.media.CamcorderProfile.get;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class friends extends Fragment {
+public class friends extends Fragment implements View.OnClickListener {
 
+
+    private ImageView search;
+    private Spinner add;
+    private ArrayAdapter<CharSequence> adapter;
 
     public friends() {
         // Required empty public constructor
@@ -44,6 +52,9 @@ public class friends extends Fragment {
     private List<String> email;
     private List<String> person;
     private List<String>sex;
+    private List<String>head;
+
+    private TextView flag;
 
     private ADUS adus;
 
@@ -66,8 +77,19 @@ public class friends extends Fragment {
         email = new ArrayList<String>();
         person=new ArrayList<String>();
         sex=new ArrayList<String>();
+        head=new ArrayList<String>();
+
+        flag=(TextView)view.findViewById(R.id.flag);
+        flag.setText("朋友");
+
+        search=(ImageView) view.findViewById(R.id.search);
+        search.setOnClickListener(this);
 
         context = getContext();
+
+        add=(Spinner)view.findViewById(R.id.add);
+        adapter= ArrayAdapter.createFromResource(context,R.array.datalist,R.layout.support_simple_spinner_dropdown_item);
+        add.setAdapter(adapter);
 
 
 
@@ -96,6 +118,8 @@ public class friends extends Fragment {
                         list1.add(ad.getAdname());
                         email.add(ad.getEmail());
                         person.add(ad.getPerson());
+                        head.add(ad.getHead());
+                        //System.out.println(ad.getHead());
                         sex.add(ad.getSex());
                     }
                     myadapt=new myadapt();
@@ -113,12 +137,14 @@ public class friends extends Fragment {
                             String femail=email.get(position);
                             String fperson=person.get(position);
                             String fsex=sex.get(position);
+                            String heads=head.get(position);
                             //Toast.makeText(context,"Toast"+name,Toast.LENGTH_SHORT).show();
                             Intent intent=new Intent(context,friend.class);
                             intent.putExtra("fname",name);
                             intent.putExtra("email",femail);
                             intent.putExtra("person",fperson);
                             intent.putExtra("sex",fsex);
+                            intent.putExtra("head",heads);
                             startActivity(intent);
                         }
                     });
@@ -137,6 +163,17 @@ public class friends extends Fragment {
 //        }
 
         return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.search:
+                Intent intent=new Intent(context,find.class);
+                startActivity(intent);
+                break;
+
+        }
     }
 
     class myadapt extends BaseAdapter {
@@ -170,8 +207,10 @@ public class friends extends Fragment {
             View view = layoutInflater.inflate(R.layout.friendslist, null);
             TextView fname = (TextView) view.findViewById(R.id.fname);
             TextView femail = (TextView) view.findViewById(R.id.femail);
+            ImageView fhead=(ImageView)view.findViewById(R.id.head);
             fname.setText((CharSequence) list1.get(position));
             femail.setText((CharSequence) email.get(position));
+            fhead.setImageBitmap(BitmapFactory.decodeFile((String) head.get(position)));
             return view;
         }
 

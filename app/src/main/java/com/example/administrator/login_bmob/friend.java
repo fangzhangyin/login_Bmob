@@ -1,6 +1,7 @@
 package com.example.administrator.login_bmob;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,11 +17,13 @@ public class friend extends AppCompatActivity implements View.OnClickListener {
     private TextView femail;
     private TextView person;
 
+    private ImageView fhead;
+
     private Spinner spinner;
     private ArrayAdapter<CharSequence> arrayAdapter;
 
 
-    private String s1,s2,s3,s4;
+    private String s1,s2,s3,s4,s5;
 
     private ImageView back;
     private ImageView fset;
@@ -36,6 +39,8 @@ public class friend extends AppCompatActivity implements View.OnClickListener {
         femail=(TextView)findViewById(R.id.femail);
         person=(TextView)findViewById(R.id.person);
 
+        fhead=(ImageView)findViewById(R.id.fhead);
+
         back=(ImageView)findViewById(R.id.back);
         fset=(ImageView)findViewById(R.id.setf);
         back.setOnClickListener(this);
@@ -46,10 +51,15 @@ public class friend extends AppCompatActivity implements View.OnClickListener {
         femail.setText(intent.getStringExtra("email"));
         person.setText(intent.getStringExtra("person"));
 
+        fhead.setImageBitmap(BitmapFactory.decodeFile(intent.getStringExtra("head")));
+
+
+
         s1=name.getText().toString();
         s2=sex.getText().toString();
         s3=femail.getText().toString();
         s4=person.getText().toString();
+        s5=intent.getStringExtra("head");
 
         spinner=(Spinner)findViewById(R.id.set);
         arrayAdapter=ArrayAdapter.createFromResource(friend.this,R.array.setlist,R.layout.support_simple_spinner_dropdown_item);

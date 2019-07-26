@@ -150,6 +150,29 @@
     </LinearLayout>
 
     <LinearLayout
+        android:paddingLeft="20dp"
+        android:id="@+id/pass"
+        android:layout_width="match_parent"
+        android:background="#ffff"
+        android:gravity="center_vertical"
+        android:layout_height="60dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="修改密码"
+            android:textSize="22dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:visibility="invisible"
+            android:layout_height="wrap_content"
+            android:text="aa"
+            android:textSize="22dp"
+            android:id="@+id/selfpass"
+            />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/selfline6"
         android:layout_marginTop="50dp"
         android:background="#7FFF00"
