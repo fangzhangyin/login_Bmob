@@ -30,6 +30,7 @@ public class news extends Fragment implements View.OnClickListener {
     private ArrayAdapter<CharSequence> adapter;
 
     private LinearLayout looknews;
+    private LinearLayout mynews;
 
     private String face;
 
@@ -54,9 +55,12 @@ public class news extends Fragment implements View.OnClickListener {
         flag.setText("动态");
         search=(ImageView)view.findViewById(R.id.search);
         looknews=(LinearLayout)view.findViewById(R.id.looknews);
+        mynews=(LinearLayout)view.findViewById(R.id.mynews);
+
 
         search.setOnClickListener(this);
         looknews.setOnClickListener(this);
+        mynews.setOnClickListener(this);
 
         add=(Spinner)view.findViewById(R.id.add);
         adapter= ArrayAdapter.createFromResource(context,R.array.datalist,R.layout.support_simple_spinner_dropdown_item);
@@ -77,6 +81,11 @@ public class news extends Fragment implements View.OnClickListener {
                 intent1.putExtra("face",face);
                 startActivity(intent1);
                 break;
+            case R.id.mynews:
+                Intent intent2=new Intent(context,mynew.class);
+                startActivity(intent2);
+                break;
+
 
 
         }
