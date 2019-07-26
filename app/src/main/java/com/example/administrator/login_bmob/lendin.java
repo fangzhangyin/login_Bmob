@@ -19,13 +19,14 @@ import butterknife.OnClick;
 
 public class lendin extends AppCompatActivity implements View.OnClickListener{
 
-    private String adname;
+    private static String adname;
     private String sex=null;
     private String person;
     private String email;
     private String id;
     private String pass;
-    private String head;
+    private static String head;
+
 
     private String[] s;
 
@@ -37,6 +38,7 @@ public class lendin extends AppCompatActivity implements View.OnClickListener{
     private ImageView m3;
     private ImageView m4;
     private LinearLayout linearLayout;
+    private ImageView search;
 
     private TextView flag;
 
@@ -63,6 +65,7 @@ public class lendin extends AppCompatActivity implements View.OnClickListener{
         m3=(ImageView)findViewById(R.id.f3);
         m4=(ImageView)findViewById(R.id.f4);
         flag=(TextView)findViewById(R.id.flag);
+        search=(ImageView)findViewById(R.id.search);
 
         spinner=(Spinner) findViewById(R.id.add);
         adapter=ArrayAdapter.createFromResource(this,R.array.datalist,R.layout.support_simple_spinner_dropdown_item);
@@ -77,6 +80,8 @@ public class lendin extends AppCompatActivity implements View.OnClickListener{
         m2.setOnClickListener(this);
         m3.setOnClickListener(this);
         m4.setOnClickListener(this);
+        search.setOnClickListener(this);
+
 
     }
 
@@ -94,8 +99,11 @@ public class lendin extends AppCompatActivity implements View.OnClickListener{
     }
     public String getid(){return id;}
     public String getpass(){return pass;}
-    public String gethead(){return head;}
+    public static String gethead(){return head;}
 
+    public static String getname(){
+        return adname;
+    }
 
     @Override
     public void onClick(View v) {
@@ -123,10 +131,17 @@ public class lendin extends AppCompatActivity implements View.OnClickListener{
                 flag.setText("个人");
                 linearLayout.setVisibility(View.GONE);
                 break;
+            case R.id.search:
+                Intent intent=new Intent(lendin.this,find.class);
+                startActivity(intent);
+                break;
                 default:
                     break;
         }
-        ft.replace(R.id.frame,f);
-        ft.commit();
+        if(f!=null){
+            ft.replace(R.id.frame,f);
+            ft.commit();
+        }
+
     }
 }

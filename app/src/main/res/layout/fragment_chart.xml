@@ -7,6 +7,7 @@
     tools:context=".chart">
 
     <!-- TODO: Update blank fragment layout -->
+    <include layout="@layout/lendhead"/>
 
 
 </FrameLayout>

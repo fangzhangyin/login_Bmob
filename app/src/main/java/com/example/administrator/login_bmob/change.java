@@ -11,7 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class change extends AppCompatActivity {
+import gangbo.baseActivity;
+
+public class change extends baseActivity {
 
     String flag;
 
@@ -22,7 +24,6 @@ public class change extends AppCompatActivity {
     public static int f;
 
     public static String msg;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +37,6 @@ public class change extends AppCompatActivity {
         final Intent intent = getIntent();
         flag = intent.getStringExtra("flag");
         System.out.println(flag);
-
-
-
 
             save.setOnClickListener(new View.OnClickListener() {
             @Override

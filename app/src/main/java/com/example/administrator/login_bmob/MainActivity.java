@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,8 +25,9 @@ import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.SaveListener;
 import entity.admin;
+import gangbo.baseActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends baseActivity {
 
 
    private  TextView t1;
@@ -190,4 +192,32 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    //绑定按钮
+    public void button(View view) {
+        Intent intent = new Intent(this, lendin.class);
+        startActivity(intent);
+    }
+
+    //重写onkeydown方法
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//点击的为返回键
+        if (keyCode == event.KEYCODE_BACK) {
+            exit();// 退出方法
+        }
+        return true;
+    }
+    //退出方法
+    private long time = 0;
+    private void exit() {
+        if (System.currentTimeMillis() - time > 2000) {
+            time = System.currentTimeMillis();
+            showToast("再点击一次退出应用程序");
+        } else {
+            Intent intent = new Intent("drc.xxx.yyy.baseActivity");
+            intent.putExtra("closeAll", 1);
+            sendBroadcast(intent);//发送广播
+        }
+    }
+
 }

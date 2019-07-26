@@ -103,8 +103,10 @@ public class self extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.exit:
-
+                getActivity().finish();
                 break;
+                default:
+                    break;
         }
     }
 }

@@ -16,8 +16,9 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 import db.ADUS;
 import entity.admin;
+import gangbo.baseActivity;
 
-public class resign extends AppCompatActivity {
+public class resign extends baseActivity {
 
     private EditText adname;
     private EditText pass1;

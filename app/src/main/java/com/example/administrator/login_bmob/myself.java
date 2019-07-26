@@ -30,15 +30,22 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 
 import butterknife.OnClick;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.UpdateListener;
 import entity.admin;
+import gangbo.baseActivity;
+import saveFile.fileWR;
 
-public class myself extends AppCompatActivity implements View.OnClickListener {
+public class myself extends baseActivity implements View.OnClickListener {
 
     private static final int CROP_SMALL_PICTURE = 1;
     private TextView selfname;
@@ -134,8 +141,8 @@ public class myself extends AppCompatActivity implements View.OnClickListener {
         if(requestCode == PictureSelector.SELECT_REQUEST_CODE&&data!=null){
             String picturePath = data.getStringExtra(PictureSelector.PICTURE_PATH);
             path=data.getStringExtra(PictureSelector.PICTURE_PATH);
-            System.out.println(path);
             head.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+            //System.out.println(path);
         }
         else if(requestCode==1){
             if(data.getStringExtra("msg")!=null) {
@@ -234,14 +241,22 @@ public class myself extends AppCompatActivity implements View.OnClickListener {
                 admin.setPerson(selfparent.getText().toString());
                 admin.setPassword(selfpass.getText().toString());
                 if(path!=null){
+                try {
+                    path= fileWR.file2(admin.getAdname(),path);
                     admin.setHead(path);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
+                }
+
+
                     admin.update(id,new UpdateListener() {
                         @Override
                         public void done(BmobException e) {
                        if(e==null){
-                           ActivityManager am = (ActivityManager)getSystemService (Context.ACTIVITY_SERVICE);
-                           am.restartPackage(getPackageName());
+//                           Intent intent = new Intent(myself.this,MainActivity.class);//跳转到MainActivity
+//                           startActivity(intent);
+                           android.os.Process.killProcess(android.os.Process.myPid());
                        }
                        else {
                            System.out.println(e.getErrorCode());
@@ -251,6 +266,7 @@ public class myself extends AppCompatActivity implements View.OnClickListener {
 
         }
     }
+
 
 
 

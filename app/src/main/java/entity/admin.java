@@ -78,4 +78,5 @@ public class admin extends BmobObject {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }
