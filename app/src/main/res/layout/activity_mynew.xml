@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingTop="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".mynew">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/li1"
+        >
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:src="@mipmap/arrow_left_alt1_32x32"
+            />
+    </LinearLayout>
+    <ListView
+        android:layout_below="@+id/li1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/myallnews"
+        >
+    </ListView>
+
+</RelativeLayout>

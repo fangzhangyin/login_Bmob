@@ -43,7 +43,7 @@
         android:layout_height="160dp">
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:background="@null"
             android:textSize="22dp"
             android:id="@+id/msg"
@@ -115,9 +115,10 @@
             android:textSize="22dp" />
 
         <ImageView
+            android:id="@+id/simi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/arrow_right_32x32" />
+            android:src="@drawable/bmob_update_btn_check_off_holo_light" />
 
     </LinearLayout>
         <View

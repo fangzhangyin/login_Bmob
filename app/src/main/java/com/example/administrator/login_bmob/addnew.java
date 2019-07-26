@@ -20,6 +20,8 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 import saveFile.fileWR;
 
+import static com.example.administrator.login_bmob.R.id.setroot;
+
 public class addnew extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView back;
@@ -33,6 +35,8 @@ public class addnew extends AppCompatActivity implements View.OnClickListener {
     private String nn;
     private String name;
     private String head;
+
+    private ImageView simi;
 
     private ImageView img;
     private String flag="1";
@@ -48,6 +52,7 @@ public class addnew extends AppCompatActivity implements View.OnClickListener {
         getimg=(LinearLayout)findViewById(R.id.getimg);
         setroot=(LinearLayout)findViewById(R.id.setroot);
         img=(ImageView)findViewById(R.id.img);
+        simi=(ImageView)findViewById(R.id.simi);
 
         name=lendin.getname();
         head=lendin.gethead();
@@ -63,6 +68,8 @@ public class addnew extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.back:
+                Intent intent=new Intent(addnew.this,allnews.class);
+                startActivity(intent);
                 finish();
                 break;
             case R.id.save:
@@ -72,6 +79,7 @@ public class addnew extends AppCompatActivity implements View.OnClickListener {
                     news.setNews(nn);
                     news.setAdname(name);
                     news.setRoot(flag);
+                    System.out.println("flag:"+flag);
                     news.setFace(head);
                     if(path!=null) {
                         try {
@@ -87,7 +95,9 @@ public class addnew extends AppCompatActivity implements View.OnClickListener {
                         @Override
                         public void done(String s, BmobException e) {
                             if(e==null){
-                                finish();
+                               Intent intent=new Intent(addnew.this,allnews.class);
+                               startActivity(intent);
+                               finish();
                             }
                         }
                     });
@@ -100,7 +110,15 @@ public class addnew extends AppCompatActivity implements View.OnClickListener {
                         .selectPicture(true, 200, 200, 1, 1);
                 break;
             case R.id.setroot:
-                break;
+                if(flag.equals("1")){
+                    simi.setImageResource(R.drawable.bmob_update_btn_check_on_holo_light);
+                    flag="0";
+                    break;
+                }else{
+                    simi.setImageResource(R.drawable.bmob_update_btn_check_off_focused_holo_light);
+                    flag="1";
+                    break;
+                }
         }
     }
 
